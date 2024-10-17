@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Historiales Clínicos</title>
+</head>
+<body>
+    <h1>Historiales Clínicos</h1>
+    <ul>
+        {% for historial in historiales %}
+        <li>
+            Paciente: {{ historial.paciente.nombre }} - Doctor: {{ historial.doctor.nombre }} - Diagnóstico: {{ historial.diagnostico }}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Historial Clínico</title>
+</head>
+<script src="scripts\crear_historial.js"></script>
+<body>
+    <h1>Crear Historial Clínico</h1>
+    <form method="post">
+        {% csrf_token %}
+        <h2>Información del Paciente</h2>
+        {{ paciente_form.as_p }}
+
+
+        <h2>Historial Clínico</h2>
+        {{ historial_form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>
