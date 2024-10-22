@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <p>Bienvenido, {{ user.username }}!</p>
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    {% else %}
+        <a href="{% url 'login_usuario' %}">Iniciar sesión</a>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

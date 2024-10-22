@@ -4,6 +4,9 @@
     <title>Historiales Clínicos</title>
 </head>
 <body>
+
+    {% extends "base.html" %}
+    {% block content %}
     <h1>Historiales Clínicos</h1>
     <ul>
         {% for historial in historiales %}
@@ -12,5 +15,6 @@
         </li>
         {% endfor %}
     </ul>
+    {% endblock %}
 </body>
 </html>

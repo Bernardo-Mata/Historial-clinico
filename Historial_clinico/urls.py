@@ -19,9 +19,11 @@ from django.urls import path, include
 from mi_aplicacion import views
 
 urlpatterns = [
+    path('', views.inicio, name='inicio'),
     path('admin/', admin.site.urls),
     path('historiales/', include('mi_aplicacion.urls')),
     path('historiales/crear/', views.crear_historial_clinico, name='crear_historial_clinico'),
-
+    path('cuentas/', include('django.contrib.auth.urls')),
+    path('cuentas/', include('mi_aplicacion.urls')),
 
 ]
