@@ -8,6 +8,17 @@
     {% extends "base.html" %}
     {% block content %}
     <h1>Historiales Clínicos</h1>
+
+    <div>
+
+        <a href="{% url 'crear_historial_clinico' %}">
+            <button>Crear Historial Clínico</button>
+        </a>
+        <!-- <form action="">
+            <button>Crear historial CLinico</button>
+        </form> -->
+        
+    </div>
     <ul>
         {% for historial in historiales %}
         <li>
@@ -16,5 +27,8 @@
         {% endfor %}
     </ul>
     {% endblock %}
+
+
+
 </body>
 </html>

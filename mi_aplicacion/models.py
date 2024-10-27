@@ -1,23 +1,32 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
-
-class Usuario(models.Model):
-    nombre = models.CharField(max_length=100)
-    apellidos = models.CharField(max_length=100)
-    correo_electronico = models.CharField(max_length=100)
-    profesion = models.CharField(max_length=100)
-    contrasenia = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    usuario_id = models.IntegerField()
-
+# class Usuario( models.Model):
+#     ROLES = (
+#         ('doctor', 'Doctor'),
+#         ('paciente', 'Paciente'),
+#     )
+#     rol = models.CharField(max_length=10, choices=ROLES, default='doctor'),
+#     nombre = models.CharField(max_length=100)
+#     apellidos = models.CharField(max_length=100)
+#     correo_electronico = models.EmailField(unique=True)
+#     profesion = models.CharField(max_length=100)
+#     contrasenia = models.CharField(max_length=100)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     usuario_id = models.IntegerField()
+#     REQUIRED_FIELDS = ['rol','nombre','apellidos' ,'profesion']
+#     USERNAME_FIELD = 'correo_electronico'
 
 class Doctor(models.Model):
-    nombre = models.CharField(max_length=100)
+    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # Relación uno a uno con Usuario
     apellidos = models.CharField(max_length=100)
     consultorio = models.CharField(max_length=100)
     profesion = models.CharField(max_length=100)
     telefono_celular = models.IntegerField()
     correo_electronico = models.CharField(max_length=100)
+
+    #CONTRASENIA DE MARIA: MariaRe123
 
 
 class Consultorio(models.Model):
@@ -42,13 +51,14 @@ class Paciente(models.Model):
     problemas_cardiacos = models.BooleanField()
     diabetes = models.BooleanField()
     telefono = models.IntegerField()
-    correo_electronico = models.IntegerField()
-    fecha_nacimiento = models.DateTimeField()
+    correo_electronico = models.CharField(max_length=100)
+    
 
 
 class HistorialClinico(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    #doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     medicamento = models.TextField()
     tratamiento = models.TextField()
     diagnostico = models.TextField()

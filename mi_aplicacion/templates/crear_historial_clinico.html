@@ -3,7 +3,7 @@
 <head>
     <title>Crear Historial Clínico</title>
 </head>
-<script src="scripts\crear_historial.js"></script>
+<!-- <script src="scripts\crear_historial.js"></script> -->
 <body>
     <h1>Crear Historial Clínico</h1>
     <form method="post">
@@ -16,5 +16,17 @@
         {{ historial_form.as_p }}
         <button type="submit">Guardar</button>
     </form>
+    {% if paciente_form.errors %}
+        <div class="errors">
+            <h2>Errores en el formulario del paciente</h2>
+            {{ paciente_form.errors }}
+        </div>
+    {% endif %}
+    {% if historial_form.errors %}
+        <div class="errors">
+            <h2>Errores en el formulario del historial clínico</h2>
+            {{ historial_form.errors }}
+        </div>
+    {% endif %}
 </body>
 </html>

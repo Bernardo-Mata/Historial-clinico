@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     
 ]
 
+
+LOGIN_REDIRECT_URL = 'ver_historiales_clinicos'  # Cambia 'inicio' por el nombre de la vista a la que quieras redirigir
+LOGOUT_REDIRECT_URL = 'inicio'  
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

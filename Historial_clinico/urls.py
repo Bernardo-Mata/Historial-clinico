@@ -24,6 +24,6 @@ urlpatterns = [
     path('historiales/', include('mi_aplicacion.urls')),
     path('historiales/crear/', views.crear_historial_clinico, name='crear_historial_clinico'),
     path('cuentas/', include('django.contrib.auth.urls')),
-    path('cuentas/', include('mi_aplicacion.urls')),
+    path('historiales/ver/', include('mi_aplicacion.urls'), name='ver_historial_clinico'),
 
 ]

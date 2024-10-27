@@ -3,8 +3,10 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import HistorialClinicoForm
-from .models import HistorialClinico, Paciente
+from .models import HistorialClinico, Paciente, Doctor
 from .forms import PacienteForm, RegistroUsuarioForm
+from django.views.decorators.http import require_POST
+
 
 # Create your views here.
 
@@ -19,6 +21,8 @@ def crear_historial_clinico(request):
             paciente = paciente_form.save()
             historial_clinico = historial_form.save(commit=False)
             historial_clinico.paciente = paciente
+            historial_clinico.usuario = request.user
+            
             historial_clinico.save()
             return redirect('ver_historiales_clinicos')
     else:
@@ -31,7 +35,7 @@ def crear_historial_clinico(request):
 
 
 def ver_historiales_clinicos(request):
-    historiales = HistorialClinico.objects.all()
+    historiales = HistorialClinico.objects.filter(usuario=request.user)
     pacientes = Paciente.objects.all()
     return render(request, 'ver_historiales_clinicos.html', {'historiales': historiales, 'pacientes': pacientes})
 
@@ -50,10 +54,12 @@ def login_usuario(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
+
+#@require_POST
 def logout_usuario(request):
 
     logout(request)
-    return redirect('login_usuario')
+    return redirect('inicio')
 
 # registro de usuarios
 def registro_usuario(request):
